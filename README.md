@@ -1,49 +1,31 @@
 # Airtable timeline assignment
 
-## Expected implementation time:
-
-4 hours
-
-## High level objective:
-
-Design and implement a component for visualizing items on a timeline.
-
-## Details:
-
-Your timeline component should arrange items in horizontal lanes. These items should be laid out in a compact, space-efficient way: if item A ends before item B starts, they can share a lane instead of being rendered on separate lanes. You may want to slightly relax this constraint to fit in the name of the event (for example, if an item is too short, or the item’s name is too long).
-
-The start and end dates will be formatted as YYYY-MM-DD date strings, for example: `2025-02-20`. You don’t need to worry about hours, minutes, seconds, or time zones. You can assume every item’s end date is the same or later than its start date.
-
-To help you implement the compact lanes, we’ve provided you with `src/assignLanes.js`. Feel free to modify and use this code however you like.
-
-You are welcome to use general purpose libraries (Moment, UI primitive libraries, etc.), but you should avoid using libraries that solve too much of the problem (i.e. renders a timeline).
-
-In addition to rendering the timeline, use whatever time you have remaining to implement any of the following enhancements:
-
-- Allow zooming in and out of the timeline
-- Allow dragging and dropping to change the start and/or end date of an item
-- Allow editing the name of items inline
-- Any other polish or useful enhancements you can think of
-
-Include a README that covers:
+## Questions:
 
 - What you like about your implementation.
+    - The core timeline functionality is clean, responsive, and visually simple.
+    - I implemented zoom controls, inline editing, and drag-and-drop movement—all without relying on external timeline libraries.
+    - The codebase is modular, with a clear separation of concerns (Timeline, TimelineItem, ZoomControls, assignLanes, etc.).
 - What you would change if you were going to do it again.
+    - I would consider using a drag-and-drop library like dnd-kit or react-dnd to better handle the dragging experience, including edge resizing and accessibility concerns.
+    - I would implement edge-based resizing to allow users to change the number of days (duration) of an item by adjusting its start or end date directly.
+    - I might improve the accessibility of the components (keyboard navigation, ARIA labels).
+
 - How you made your design decisions. For example, if you looked at other timelines for inspiration, please note that.
+    - I chose to use React with Vite to quickly set up a clean and modern development environment. This gave me a clear file structure and fast iteration during development.
+    - I structured the project into well-organized folders (components, data, utils) to showcase my understanding of maintainable frontend architecture.
+    - I used Tailwind CSS to speed up styling and ensure responsiveness without spending too much time on custom CSS.
+    - I prioritized implementing the core functionality first (timeline layout, lane assignment, axis, item rendering) and then moved on to the optional enhancements (zoom, inline editing, drag-and-drop) in order of complexity.
+
 - How you would test this if you had more time.
-
-If you did not use the starter code, please also include instructions on how to build and run your project so we can see and interact with the timeline component you built. It should render the sample data included in `src/timelineItems.js`.
-
-What we’re looking for:
-
-- Clean, readable, maintainable code.
-- A sensible user experience and design for the final product.
+    - I’d write unit tests for utility functions like assignLanes
+    - I’d test the layout behavior with edge cases like overlapping items, very short or very long events, and timeline zoom extremes.
+    - I would also write visual regression tests to catch any layout breaks when styling changes.
 
 ## Starter code:
 
-1. Navigate to this project directory
+1. git clone https://github.com/miikEe13/timeline.git
+1. Navigate to project directory
 2. Run `npm install` to install dependencies
-3. Run `npm start` to initialize and connect to a node server with your default browser
-4. Develop in your own local environment
-
-Please feel free to use as much or as little of the starter code as you'd like.
+3. Run `npm run dev` to initialize and connect to a node server with your default browser
+4. open in browser with the url in the console
