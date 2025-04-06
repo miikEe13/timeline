@@ -2,7 +2,6 @@ import React from "react";
 
 const generateDates = (min, max) => {
   const dates = [];
-
   const start = new Date(min.getFullYear(), min.getMonth(), 1);
   const end = new Date(max.getFullYear(), max.getMonth(), 1);
 
