@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { assignLanes } from "../utils/assignLanes";
-import timelineItems from "../data/timelineItems";
 import TimelineItem from "./TimelineItem";
 import TimelineAxis from "./TimelineAxis";
 import ZoomControls from "./ZoomControls";
 
 import useZoom from "../hooks/useZoom";
+
+import timelineItemsData from "../data/timelineItems";
 
 const getTimelineRange = (items) => {
   const starts = items.map((item) => new Date(item.start).getTime());
@@ -14,20 +15,26 @@ const getTimelineRange = (items) => {
 };
 
 export default function Timeline() {
-  const lanes = assignLanes(timelineItems);
-  const [minTime, maxTime] = getTimelineRange(timelineItems);
+  const [items, setItems] = useState(timelineItemsData);
   const { zoom, zoomIn, zoomOut, resetZoom } = useZoom();
 
+  const lanes = assignLanes(items);
+  const [minTime, maxTime] = getTimelineRange(items);
   const totalDuration = maxTime - minTime;
 
   const calculatePosition = (date) => {
     return ((new Date(date).getTime() - minTime) / totalDuration) * 100;
   };
-
   const calculateWidth = (start, end) => {
     return (
       ((new Date(end).getTime() - new Date(start).getTime()) / totalDuration) *
       100
+    );
+  };
+
+  const handleRename = (id, newName) => {
+    setItems((prev) =>
+      prev.map((it) => (it.id === id ? { ...it, name: newName } : it))
     );
   };
 
@@ -54,6 +61,7 @@ export default function Timeline() {
                     item={item}
                     left={calculatePosition(item.start)}
                     width={calculateWidth(item.start, item.end)}
+                    onRename={handleRename}
                   />
                 ))}
               </div>
